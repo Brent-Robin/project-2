@@ -36,16 +36,16 @@ const mainDiv = document.querySelector('.page');
 ***/
 const showPage = (list, page = 1) => {
    const higher = page * 10 - 1;
-   console.log(higher); 
+   // console.log(higher); 
    const lower = page * 10 - 10;
-   console.log(lower);
+   // console.log(lower);
    for (let i = 0; i < list.length; i++) {
       if (i >= lower && i <= higher) {
-         console.log('im displayed');
+         // console.log('im displayed');
          list[i].style.display = 'block';
 
       } else {
-         console.log('im hidden');
+         // console.log('im hidden');
          list[i].style.display = 'none';
       }
    }
@@ -61,7 +61,7 @@ showPage(studentsList);
 
 const appendPageLinks = (list) => {
    let maxPage = Math.ceil(list.length / 10);
-   console.log(maxPage);
+   // console.log(maxPage);
    let pagination = document.createElement('div');
    pagination.className = 'pagination';
    mainDiv.appendChild(pagination);
@@ -75,22 +75,27 @@ const appendPageLinks = (list) => {
       paginationUl.appendChild(li);
       li.appendChild(a);
       a.textContent = pageNumber;
-      a.className = ''; 
-      const anchorTags = document.querySelectorAll('a')
-      let firstPage = anchorTags[0];
-      firstPage.className = 'active';
-         
+      const anchorTags = document.querySelectorAll('a');
+      console.log(pageNumber)
+      if (pageNumber == 1){
+         anchorTags[0].className = 'active';
+      }
    //   document.onload = anchorTags[0].className = 'active';
    // console.log(anchorTags);
-       anchorTags[i].addEventListener('click', (e) => {
+      anchorTags[i].addEventListener('click', (e) => {
          let pageButton = parseInt(anchorTags[i].textContent);
          showPage(studentsList, pageButton);
-         e.target.className = 'active';
          console.log(e.target);
-         }  
-      );  
+         console.log(pageNumber);
+         if(pageNumber == 1){
+            anchorTags[0].className = 'active';
+         } else {anchorTags[0].className = ''}
+         if(pageNumber == 2){
+            anchorTags[1].className = 'active';
+         } else {anchorTags[1].className = ''}
+      }  
+      );
    }
-         
 }  
 
 
